@@ -12,7 +12,7 @@ describe("Visual Regression Testing", () => {
     cy.eyesClose();
   });
   it("check dialog page", () => {
-    var dialogs = cy.get(".mb-5 .v-card__text button.v-btn.primary");
+    var dialogs = cy.get("[data-cy-btn=dialog]");
     dialogs.each(dialog => { 
       cy.wrap(dialog).click();
       cy.wait(500);
@@ -21,10 +21,10 @@ describe("Visual Regression Testing", () => {
         selector: ".container.page"
       });
       const currentDialog = cy.get('.v-dialog.v-dialog--active');
-      let actionButtons = currentDialog.find(".v-card__actions .v-btn, .v-btn.v-btn--icon");
+      let actionButtons = currentDialog.find("[data-cy-btn=dialog-close]");
       if (actionButtons) {
-        actionButtons.click({multiple:true, force: true});
-      } 
+        actionButtons.click({force:true});
+      }
       cy.wait(500);
     });
   });

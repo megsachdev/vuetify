@@ -1,4 +1,4 @@
-import {  environment } from "../../../utils";
+import { environment } from "../../../utils";
 describe("Visual Regression Testing", () => {
   before(() => {
     cy.eyesOpen({
@@ -13,20 +13,15 @@ describe("Visual Regression Testing", () => {
   });
 
   it("check usage hover", () => {
-    cy.get(".mb-5.v-card.v-sheet:nth-child(3) .v-card").trigger("mouseenter");
-    cy.wait(500);
-    cy.eyesCheckWindow({
-      sizeMode: "selector", //mode
-      selector: ".mb-5.v-card.v-sheet:nth-child(3)"
-    });
-  });
-
-  it("check example hover", () => {
-    cy.get(".mb-5.v-card.v-sheet:nth-child(5) .v-card").trigger("mouseenter");
-    cy.wait(500);
-    cy.eyesCheckWindow({
-      sizeMode: "selector", //mode
-      selector: ".mb-5.v-card.v-sheet:nth-child(5)"
-    });
+    const cards = cy.get('[data-cy-card]');
+    cards.each(cardElement => {
+      const card = cy.wrap(cardElement);
+      card.trigger("mouseenter");
+      cy.wait(500);
+      cy.eyesCheckWindow({
+        sizeMode: "selector", //mode
+        selector: '[data-cy-card='+ cardElement.attr('data-cy-card') +']'
+      });
+    })
   });
 });

@@ -13,7 +13,7 @@ describe("Visual Regression Testing", () => {
   });
 
   it("check tooltip", () => {
-    var tooltips = cy.get(".mb-5.v-card.v-sheet .v-sheet .v-btn, .mb-5.v-card.v-sheet .v-sheet .v-icon");
+    var tooltips = cy.get('[data-cy-btn=tooltip]');
     tooltips.each(tooltip => { 
       cy.wrap(tooltip).trigger("mouseenter");
       cy.wait(500);
